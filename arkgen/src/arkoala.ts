@@ -281,6 +281,13 @@ export function generateArkoalaFromIdl(config: {
         //     printPredefinedNativeModule(peerLibrary, NativeModuleType.Interop).printToString(),
         // )
         writeFile(
+            path.join(arkoala.managedDir, 'framework', 'arkts', 'index' + peerLibrary.language.extension),
+            makeArkuiModule(
+                [NativeModule.Generated, NativeModule.ArkUI, NativeModule.Test].map(it =>
+                    path.join(arkoala.managedDir, 'framework', 'arkts', it.name + peerLibrary.language.extension)),
+                path.join(arkoala.managedDir, 'framework', 'arkts')),
+        )
+        writeFile(
             path.join(arkoala.managedDir, 'framework', 'index' + peerLibrary.language.extension),
             makeArkuiModule(arkuiComponentsFiles.concat(installedFiles), path.join(arkoala.managedDir, 'framework')),
         )
