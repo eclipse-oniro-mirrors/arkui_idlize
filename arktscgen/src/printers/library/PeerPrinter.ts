@@ -342,7 +342,6 @@ export class PeerPrinter extends SingleFilePrinter {
         writer: TSLanguageWriter
     ) : LanguageStatement {
         const [getter, setter] = methods
-        //console.log(`${prop.name} => ${getter?.name} ${setter?.name}`);
 
         const str = (n: string) => writer.makeString(n)
         const type = 'parameters' in setter ? setter.parameters.at(0)?.type : undefined

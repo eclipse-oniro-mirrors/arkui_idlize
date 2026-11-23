@@ -270,7 +270,6 @@ abstract class MaterializedFileVisitorBase implements MaterializedFileVisitor {
                 return true
             })
             .forEach(([tagged, method]) => {
-                // const method = methodFromTagged(taggedMethod)
                 const signature = new NamedMethodSignature(
                     method.returnType,
                     method.parameters.map(it => it.type!),

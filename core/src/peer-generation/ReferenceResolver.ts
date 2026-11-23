@@ -51,8 +51,6 @@ export function createAlgotithmicReferenceResolver(files: idl.IDLFile[], useFall
         for (let file of files) {
             const result = resolveNamedNode([...file.packageClause, ...target], undefined, files)
             if (result && idl.isEntry(result)) {
-                // too much spam
-                // console.warn(`WARNING: Type reference '${qualifiedName}' is not resolved from ${povAsReadableString} but resolved from some package '${file.packageClause().join(".")}'`)
                 resolveds.add(result)
             }
         }

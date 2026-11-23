@@ -178,16 +178,6 @@ export function generateArkoalaFromIdl(config: {
 
     const arkuiComponentsFiles: string[] = []
 
-    // const peers = printPeers(peerLibrary, config.dumpSerialized ?? false)
-    // for (const [targetFile, peer] of peers) {
-    //     const outPeerFile = arkoala.peer(targetFile)
-    //     writeFile(outPeerFile, peer, {
-    //         onlyIntegrated: config.onlyIntegrated,
-    //         integrated: true,
-    //         message: "producing"
-    //     })
-    // }
-
     const spreadIfLang = <T>(langs: Language[], ...data: T[]): T[] => {
         if (langs.includes(peerLibrary.language))
             return data

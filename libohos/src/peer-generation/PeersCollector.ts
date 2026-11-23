@@ -144,7 +144,6 @@ function processOptionAttribute(seenAttributes: Set<string>, property: idl.IDLPr
         return
     }
     seenAttributes.add(propName)
-    // const type = this.fixTypeLiteral(propName, property.type, peer)
     peer.attributesFields.push(property)
 }
 

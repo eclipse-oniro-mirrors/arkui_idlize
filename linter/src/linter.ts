@@ -79,7 +79,6 @@ export class LinterVisitor implements GenerateVisitor<LinterMessage[]> {
     }
 
     visitVariable(node: ts.VariableStatement) {
-        //if (node.modifiers?.includes(ts.factory.createToken(ts.SyntaxKind.DeclareKeyword))) {
         node.declarationList.forEachChild(declaration => {
                 if (ts.isVariableDeclaration(declaration)) {
                     if (declaration.initializer == undefined && declaration.type) {

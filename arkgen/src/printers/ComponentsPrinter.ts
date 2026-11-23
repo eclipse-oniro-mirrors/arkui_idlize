@@ -420,7 +420,6 @@ class CJComponentFileVisitor implements ComponentFileVisitor {
                         writer.print('} else { throw Exception()}')
                     }
                 )
-                // for (const grouped of groupOverloads(filteredMethods))
                 for (const grouped of peer.methods)
                     this.overloadsPrinter(printer).printGroupedComponentOverloads(peer.originalClassName!, [grouped])
                 // todo stub until we can process AttributeModifier
@@ -500,9 +499,6 @@ class KotlinComponentFileVisitor implements ComponentFileVisitor {
     visit(): PrinterResult[] {
         const result: PrinterResult[] = []
         collectPeersForFile(this.library, this.file).forEach(peer => {
-            // if (!this.options.isDeclared)
-            //     result.push(...this.printComponent(peer))
-            // result.push(...this.printComponentFunction(peer))
         })
         return result
     }

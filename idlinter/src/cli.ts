@@ -35,7 +35,6 @@ function processIdl(checkFiles: Set<string>, loadFiles: Set<string>) {
     performance.mark("procEnd")
     performance.measure("proc", "procStart", "procEnd")
     const measure = performance.getEntriesByName("proc")[0];
-    //console.log(`Processing duration: ${measure.duration} milliseconds`);
 
     outputDiagnosticResultsFormatted(DiagnosticMessageGroup.collectedResults)
 }

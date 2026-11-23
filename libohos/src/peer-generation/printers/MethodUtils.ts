@@ -40,7 +40,6 @@ function isDirectConvertedType(originalType: idl.IDLType|undefined, library: Pee
         convertor instanceof AggregateConvertor ||
         convertor instanceof OptionConvertor ||
         convertor instanceof ImportTypeConvertor) {
-        // try { console.log(`convertor is ${convertor.constructor.name} for ${JSON.stringify(originalType)}`) } catch (e) {}
         return false
     }
     let type = convertor.interopType()
@@ -73,6 +72,5 @@ export function isDirectMethod(method: Method, library: PeerLibrary): boolean {
     }
     let result = isDirectConvertedType(method.signature.returnType, library) &&
             method.signature.args.every((arg) => isDirectConvertedType(arg, library))
-    // if (!result) console.log(`method ${method.name} is not direct`)
     return result
 }

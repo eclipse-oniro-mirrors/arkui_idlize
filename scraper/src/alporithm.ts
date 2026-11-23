@@ -17,7 +17,7 @@ import { Language, NativeModuleType, PeerLibrary, throwException } from "@idlize
 import { createFile, createNamespace, forEachChild, getFileFor, getFQName, IDLEntry, IDLFile, isImport, isNamespace, isReferenceType, linearizeNamespaceMembers, toIDLString } from "@idlizer/core/idl";
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { ADDITIONAL_CONFIG_DIR, AppConfig, BASIC_CONFIG_PATH, BASIC_MODULES_CONFIG_PATH, OUT_DIR, SUMMARY_PATH } from "./shared";
-import { dirname, join, relative, basename, resolve, extname, sep } from "node:path";
+import { dirname, join, relative, basename, resolve, sep } from "node:path";
 import { scan } from "./utils";
 
 interface SummaryResultRecord {
@@ -306,16 +306,6 @@ rule ohosgen
             relative(OUT_DIR, arkuiGeneratedPath('**', '*.ets'))
         ],
     }
-    // const SDK_DIR = resolve('..', 'sdk-patched-arkts', 'api')
-    // result.external.forEach(record => {
-    //     if (record.packageName === '') {
-    //         return
-    //     }
-    //     const idlFileName = record.fileName
-    //     const pureFilePath = join(dirname(idlFileName), basename(idlFileName, extname(idlFileName)))
-    //     const frontendFilePath = join(SDK_DIR, pureFilePath)
-    //     arkuiConfig.compilerOptions.paths[findTsLikePackage(record, options)] = [frontendFilePath + '.d.ets']
-    // })
     scanAbsolutePathDir().forEach(([packageName, fileName]) => {
         let value = [fileName]
         if (options.rewriteArkConfigPath.has(packageName)) {

@@ -83,7 +83,6 @@ function getModuleImport(node: idl.IDLEntry, role: LayoutNodeRole, lang: Languag
     const conf = peerGeneratorConfiguration()
     // TBD: use idl.mapLibraryName(...) when the Arkoala imports printing is fixed
     // in ImportsCollector.printToLines(...)
-    // return idl.mapLibraryName(node, lang, conf?.libraryNameMapping)
 
     const packageName = idl.getPackageName(node)
     const module = idl.getModuleFor(node)
@@ -115,9 +114,6 @@ export class TsLayout extends CommonLayoutBase {
         if (idl.isHandwritten(target.node) || peerGeneratorConfiguration().isHandWritten(target.node.name)) {
             return HandwrittenModule(this.library.language)
         }
-        // if (idl.isSyntheticEntry(target.node)) {
-        //     return SyntheticModule
-        // }
 
         const moduleImport = getModuleImport(target.node, target.role, Language.TS)
         if (moduleImport) return moduleImport

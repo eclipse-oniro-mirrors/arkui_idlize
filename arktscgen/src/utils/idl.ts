@@ -113,7 +113,6 @@ export function flattenType(type: IDLType): IDLType {
     if (idl.isReferenceType(type)) {
         if (type.name.indexOf(".") > 0) {
             let result = idl.createReferenceType(baseName(type))
-            //console.log(`flatten ${type.name} to ${result.name}`)
             return result
         }
     }
@@ -276,7 +275,6 @@ export function flatParentsImpl(
         result.push(node)
 
         if (result.length > 1 && baseNameString(ref.name) === node.name) {
-            //console.warn(`Cyclic dependency: ${ref.name} -> ${node.name}`);
             break
         }
 

@@ -248,7 +248,6 @@ export class CustomPrintVisitor {
         let isProtected = hasExtAttribute(node, IDLExtendedAttributes.Protected)
         if (isCommonMethod) {
             // TODO: not very clean, but we don't need to print these so far.
-            // if (peerGeneratorConfiguration().ignorePeerMethod.includes(node.name)) return
             const typeParams = this.currentInterface?.typeParameters
             const returnType = typeParams && typeParams.length > 0 ? typeParams[0] : this.currentInterface!.name
             this.print(`${getName(node)}(value: ${this.printTypeForTS(node.type, undefined, undefined, isCommonMethod)}): ${returnType};`)
@@ -285,12 +284,7 @@ export class CustomPrintVisitor {
             let definition = this.resolver(createReferenceType(node))
             // TODO: handle namespace case better!
             // TODO: namespace-related-to-rework
-            //throw new Error("not implemented yet")
             warn("Typedef-with-Import is not implemented yet")
-            // if (definition && !isTypedef(definition) && !hasExtAttribute(definition, IDLExtendedAttributes.Namespace)) {
-            //     console.log(`Has better definition for ${node.name}: ${definition.fileName} ${definition.kind}`)
-            //     return
-            // }
         }
         const text = isCallback(node) ? this.callback(node)
             : hasExtAttribute(node, IDLExtendedAttributes.Import) ? IDLAnyType.name

@@ -188,7 +188,6 @@ export function generateFromSts({ inputFiles, baseDir, outDir, etsConfigPath, co
             if (e.trace)
                 console.log(e.trace)
             // But current es2panda just forcefully exits.
-            // throw e
             failed.push({
                 error: e,
                 fileName: program.absoluteName

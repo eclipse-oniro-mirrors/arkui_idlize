@@ -64,19 +64,6 @@ export class StructPrinter {
     }
 
     private printStructsCHead(name: string, target: idl.IDLNode, structs: LanguageWriter) {
-        // if (descriptor.isArray) {
-        //     // Forward declaration of element type.
-        //     let elementTypePointer = descriptor.getFields()[0].declaration
-        //     if (!(elementTypePointer instanceof PointerType))
-        //         throw new Error(`Unexpected ${this.computeTargetName(elementTypePointer, false)}`)
-        //     let elementType = elementTypePointer.pointed
-        //     if (!(elementType instanceof PrimitiveType)) {
-        //         let name = this.computeTargetName(elementType, false)
-        //         if (ts.isEnumDeclaration(elementType)) {
-        //             structs.print(`typedef int32_t ${this.enumName(elementType.name)};`)
-        //         }
-        //     }
-        // }
         structs.print(`typedef struct ${name} {`)
         structs.pushIndent()
     }
