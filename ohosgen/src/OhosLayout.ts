@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 import * as idl from "@idlizer/core/idl"
+import * as path from "path"
 import { currentModule, mapLibraryName, isInCurrentModule, isInExternalModule, isInIdlize, Language, LayoutManagerStrategy, LayoutNodeRole, LayoutTargetDescription, PeerLibrary } from "@idlizer/core"
 import { peerGeneratorConfiguration } from "@idlizer/libohos"
 

@@ -538,7 +538,6 @@ class OHOSNativeVisitor {
         createDeserializeAndCallPrinter(this.library.name, Language.CPP)(this.library).forEach(result => {
             this.cppWriter.concat(result.content)
         })
-        // this.cppWriter.concat(makeDeserializeAndCall(this.library, Language.CPP, 'serializer.cc').content)
         this.cppWriter.concat(printManagedCaller('', this.library).content)
         this.hWriter.writeLines(readTemplate('any_api.tpl', { removeCopyright: true }))
         this.hWriter.writeLines(readTemplate('generic_service_api.h'))

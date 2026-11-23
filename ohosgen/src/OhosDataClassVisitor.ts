@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import { FieldModifier, getSuper, getSuperType, IDLInterface, IDLProperty, IDLReferenceType, isClassSubkind, isInCurrentModule, isInterface, isMaterialized, LanguageWriter, LayoutNodeRole, linearizeNamespaceMembers, PeerLibrary } from "@idlizer/core";
-import { collectDeclDependencies, ImportsCollector, peerGeneratorConfiguration, PrinterResult } from "@idlizer/libohos";
+import { FieldModifier, getSuper, getSuperType, IDLInterface, IDLMethod, IDLProperty, IDLReferenceType, isClassSubkind, isInCurrentModule, isInterface, isMaterialized, Language, LanguageWriter, LayoutNodeRole, lib, linearizeNamespaceMembers, maybeOptional, MethodModifier, NamedMethodSignature, PeerLibrary } from "@idlizer/core";
+import { allowsOverloads, collapseSameMethodsIDL, collectDeclDependencies, groupOverloadsIDL, groupSameSignatureMethodsIDL, ImportsCollector, peerGeneratorConfiguration, PrinterResult } from "@idlizer/libohos";
 
 export function printDataClasses(library: PeerLibrary): PrinterResult[] {
     return library.files
@@ -68,7 +68,24 @@ function printInterfaceBody(library: PeerLibrary, entry: IDLInterface, printer: 
         const initExpr = defValue != undefined ? printer.makeString(defValue) : undefined
         printer.writeFieldDeclaration(prop.name, prop.type, toFieldModifiers(prop), prop.isOptional, initExpr)
     })
+
 }
+
+
+function printCollapsedOverloads(library: PeerLibrary, methods: IDLMethod[], printer: LanguageWriter) {
+    if (methods.some(it => it.isStatic))
+        return
+    const method = collapseSameMethodsIDL(methods, library.language)
+    const signature = NamedMethodSignature.make(
+        method.returnType,
+        method.parameters
+            .map(it => ({ name: it.name, type: maybeOptional(it.type, it.isOptional) }))
+    )
+    printer.writeMethodDeclaration(method.name, signature, toMethodModifiers(method.methods[0]))
+}
+
+
+/////////////////////////////////////////////////
 
 function toFieldModifiers(prop: IDLProperty) {
     const modifiers: FieldModifier[] = []
@@ -77,6 +94,14 @@ function toFieldModifiers(prop: IDLProperty) {
     }
     if (prop.isReadonly) {
         modifiers.push(FieldModifier.READONLY)
+    }
+    return modifiers
+}
+
+function toMethodModifiers(method: IDLMethod) {
+    const modifiers: MethodModifier[] = []
+    if (method.isStatic) {
+        modifiers.push(MethodModifier.STATIC)
     }
     return modifiers
 }

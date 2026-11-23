@@ -122,7 +122,6 @@ class PeerFileVisitor {
             imports.addFeature("unsafeCast", "@koalaui/common")
         }
         imports.addFeatures(["MaterializedBase", "toPeerPtr"], "@koalaui/interop")
-        // collectMaterializedImports(imports, this.library)
     }
 
     protected printPeerConstructor(peer: PeerClass, printer: LanguageWriter): void {

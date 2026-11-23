@@ -500,7 +500,6 @@ export class AggregateConvertor extends BaseArgConvertor {
         super(type, [RuntimeType.OBJECT], false, true, param)
         this.memberConvertors = decl
             .properties
-            // .filter(ts.isPropertySignature)
             .map((member, index) => {
                 this.members[index] = [member.name, member.isOptional]
                 return library.typeConvertor(param, member.type!, member.isOptional)
