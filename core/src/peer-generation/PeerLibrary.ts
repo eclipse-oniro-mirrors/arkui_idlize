@@ -347,7 +347,6 @@ export class PeerLibrary implements LibraryInterface {
                 return new CustomTypeConvertor(param, "Record", false, "Record<string, string>")
             case `Optional`:
                 throw new Error("Not expected to have reference type named Optional")
-                // return new OptionConvertor(this, param, type.typeArguments![0])
         }
         return undefined
     }

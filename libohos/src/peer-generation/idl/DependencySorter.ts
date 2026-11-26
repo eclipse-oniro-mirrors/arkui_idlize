@@ -60,7 +60,6 @@ class SorterDependenciesCollector implements NodeConvertor<idl.IDLNode[]> {
     }
     convertContainer(type: idl.IDLContainerType): idl.IDLNode[] {
         return [] // hack: containers are not required a complete element declaration in all languages we have, only forward, so, simulate no dependency here
-        //return type.elementType.flatMap(it => this.toDeclarations(it))
     }
     convertImport(type: idl.IDLImport): idl.IDLNode[] {
         console.warn("Imports are not implemented yet")
@@ -166,7 +165,6 @@ export class DependencySorter {
     addDepExactly(declaration: idl.IDLNode) {
         declaration = this.cachedTransformer.transofrm(declaration)
         this.fillDependencies(declaration)
-        // if (seen.size > 0) console.log(`${name}: depends on ${Array.from(seen.keys()).join(",")}`)
     }
 
     addDep(declaration: idl.IDLNode) {
@@ -215,7 +213,6 @@ export class DependencySorter {
                 for(const it of broken)
                     console.warn(`${namer.convert(it)} -> [${this.adjMap.get(it)?.filter(it => !result.has(it)).map(it => namer.convert(it)).join(", ")}]`)
                 console.warn("DependencySorter dependencies end")
-                //throw new Error("unsatisfeable dependencies detected")
 
                 broken.forEach(it => {
                     result.add(it)
@@ -223,13 +220,6 @@ export class DependencySorter {
             }
             input = broken
         }
-        // if(1) {
-        //     const namer = this.library.createTypeNameConvertor(Language.CPP)
-        //     console.debug("DEPS BEGIN")
-        //     for(const it of resultArray)
-        //         console.debug(namer.convert(it))
-        //     console.debug("DEPS END")
-        // }
         return [...result.values()]
     }
 }

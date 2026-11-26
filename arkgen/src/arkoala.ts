@@ -90,7 +90,6 @@ export function generateLibaceFromIdl(config: {
     const gniSources = printGniSources(peerLibrary)
     fs.writeFileSync(libace.gniComponents, gniFile(gniSources))
 
-    // printDelegatesAsMultipleFiles(peerLibrary, libace, { namespace: "OHOS::Ace::NG::GeneratedModifier" })
     printRealModifiersAsMultipleFiles(peerLibrary, libace, {
         namespaces: {
             base: "OHOS::Ace::NG",
@@ -177,16 +176,6 @@ export function generateArkoalaFromIdl(config: {
     peerLibrary.setFileLayout(arkoalaLayout(peerLibrary, 'Ark'))
 
     const arkuiComponentsFiles: string[] = []
-
-    // const peers = printPeers(peerLibrary, config.dumpSerialized ?? false)
-    // for (const [targetFile, peer] of peers) {
-    //     const outPeerFile = arkoala.peer(targetFile)
-    //     writeFile(outPeerFile, peer, {
-    //         onlyIntegrated: config.onlyIntegrated,
-    //         integrated: true,
-    //         message: "producing"
-    //     })
-    // }
 
     const spreadIfLang = <T>(langs: Language[], ...data: T[]): T[] => {
         if (langs.includes(peerLibrary.language))
@@ -308,10 +297,6 @@ export function generateArkoalaFromIdl(config: {
             path.join(arkoala.managedDir, 'framework', 'arkts', NativeModule.Test.name + peerLibrary.language.extension),
             printPredefinedNativeModule(peerLibrary, NativeModule.Test).printToString(),
         )
-        // writeIntegratedFile(
-        //     arkoala.arktsLib(new TargetFile(NativeModuleType.Interop.name, 'arkts')),
-        //     printPredefinedNativeModule(peerLibrary, NativeModuleType.Interop).printToString(),
-        // )
         writeFile(
             path.join(arkoala.managedDir, 'framework', 'index' + peerLibrary.language.extension),
             makeArkuiModule(arkuiComponentsFiles.concat(installedFiles), path.join(arkoala.managedDir, 'framework')),
@@ -342,12 +327,6 @@ export function generateArkoalaFromIdl(config: {
                 printPredefinedNativeModule(peerLibrary, NativeModule.Test).content.getOutput().join('\n')
             )
         )
-        // writeIntegratedFile(
-        //     arkoala.cjLib(new TargetFile(NativeModule.Interop.name)),
-        //     printCJPredefinedNativeFunctions(peerLibrary, NativeModule.Interop).printToString().concat(
-        //         printPredefinedNativeModule(peerLibrary, NativeModule.Interop).content.getOutput().join('\n')
-        //     )
-        // )
         writeFile(path.join(arkoala.managedDir, 'CallbackKind' + peerLibrary.language.extension),
             makeCallbacksKinds(peerLibrary, peerLibrary.language),
             {

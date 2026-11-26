@@ -117,53 +117,6 @@ export class OhosTsLayout implements LayoutManagerStrategy {
     }
 }
 
-// export class OhosCJLayout implements LayoutManagerStrategy {
-//     constructor(private library: PeerLibrary) {}
-
-//     private getPath(file:string):string {
-//         return path.join('.', file)
-//     }
-//     resolve(node: idl.IDLNode, role: LayoutNodeRole): string {
-//         switch (role) {
-//             case LayoutNodeRole.INTERFACE: {
-//                 if (idl.isEntry(node)) {
-//                     const ns = idl.getNamespaceName(node)
-//                     if (ns !== '') {
-//                         return this.getPath(`${this.prefix}${ns.split('.').map(it => idl.capitalize(it)).join('')}Namespace`)
-//                     }
-//                 }
-//                 if (idl.isInterface(node)) {
-//                     if (isComponentDeclaration(this.library, node)) {
-//                         return this.getPath(`${this.prefix}${toFileName(node.name)}`)
-//                     }
-//                     if (idl.isBuilderClass(node)) {
-//                         return this.getPath(`${this.prefix}${toFileName(node.name)}Builder`)
-//                     }
-//                     if (isMaterialized(node, this.library)) {
-//                         if (idl.isInterfaceSubkind(node)) {
-//                             return this.getPath(toFileName(node.name) + 'Internal')
-//                         }
-//                         return this.getPath(toFileName(node.name))
-//                     }
-//                     return this.getPath(`${this.prefix}${toFileName(node.name)}Interfaces`)
-//                 }
-//                 return this.getPath(`Common`)
-//             }
-//             case LayoutNodeRole.PEER: {
-//                 if (idl.isInterface(node)) {
-//                     if (isComponentDeclaration(this.library, node)) {
-//                         return this.getPath(`peers/${this.prefix}${toFileName(node.name)}Peer`)
-//                     }
-//                 }
-//                 return this.getPath(`CommonPeer`)
-//             }
-//             case LayoutNodeRole.GLOBAL: {
-//                 return 'GlobalScope'
-//             }
-//         }
-//     }
-// }
-
 export function ohosLayout(library: PeerLibrary): LayoutManagerStrategy {
     switch(library.language) {
         case Language.TS:
@@ -171,7 +124,6 @@ export function ohosLayout(library: PeerLibrary): LayoutManagerStrategy {
         case Language.CJ:
         case Language.KOTLIN:
             return new OhosTsLayout(library)
-        //     return new CJLayout(library)
         default: throw new Error(`Ohos layout for language ${library.language.name} is not implemented`)
     }
 }

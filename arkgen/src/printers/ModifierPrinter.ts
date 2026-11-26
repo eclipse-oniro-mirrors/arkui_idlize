@@ -378,7 +378,6 @@ class ModifiersFileVisitor {
                     const expr = `${this.generateFiledFlag(attribute, index, true)} != ${AttributeUpdaterFlag.INITIAL}`
                     const params: LanguageExpression[] = attribute.args.map((_, index) => {
                         return this.castSetType(attribute, writer, attribute.method.method.signature, index)
-                        // return writer.makeCast(writer.makeString(`this.${this.generateFiledName(attribute, index.toString())}`), this.castResetType(attribute.method.method.signature.args[index]))
                     })
                     const resetParams: LanguageExpression[] = attribute.args.map((_, index) => {
                         return this.castResetType(writer, attribute.method.method.signature, index)
@@ -544,7 +543,6 @@ class ModifiersFileVisitor {
             const overloadCounter: Map<string, number> = new Map()
 
             const noNeedPrintModifier = (attribute: AttributeType) => {
-                // return attribute.method.method.signature.returnType !== idl.IDLThisType || !attribute.isOptional
                 return attribute.method.method.signature.returnType !== idl.IDLThisType
             }
 

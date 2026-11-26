@@ -69,22 +69,6 @@ function printInterfaceBody(library: PeerLibrary, entry: IDLInterface, printer: 
         printer.writeFieldDeclaration(prop.name, prop.type, toFieldModifiers(prop), prop.isOptional, initExpr)
     })
 
-    // const groupedMethods = groupOverloadsIDL(entry.methods, library.language)
-    // if (!allowsOverloads(library.language)) {
-    //     groupedMethods.forEach(methods => {
-    //         printCollapsedOverloads(library, methods, printer)
-    //     })
-    // } else {
-    //     // Handle special case for same name AND same signature methods.
-    //     // Collapse same signature methods
-    //     groupedMethods.forEach(sameNameGroup => {
-    //         let copy = Array.from([...sameNameGroup])
-    //         const sameSignatureMethodsGroups = groupSameSignatureMethodsIDL([...copy])
-    //         for (let sameSignatureGroup of sameSignatureMethodsGroups) {
-    //             printCollapsedOverloads(library, sameSignatureGroup, printer)
-    //         }
-    //     })
-    // }
 }
 
 

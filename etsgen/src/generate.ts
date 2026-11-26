@@ -163,7 +163,6 @@ export function generateFromSts({ inputFiles, baseDir, outDir, etsConfigPath, co
     ]).peer
     if (!arkts.global.configIsInitialized()) throw new Error(`Wrong config: path=${etsConfigPath}`);
     arkts.arktsGlobal.compilerContext = arkts.Context.createContextGenerateAbcForExternalSourceFiles(inputFiles)
-    // arkts.global.isContextGenerateAbcForExternalSourceFiles = true;
     const options = arkts.Options.createOptions(new arkts.Config(arkts.global.config));
     arkts.global.arktsconfig = options.getArkTsConfig();
 
@@ -188,7 +187,6 @@ export function generateFromSts({ inputFiles, baseDir, outDir, etsConfigPath, co
             if (e.trace)
                 console.log(e.trace)
             // But current es2panda just forcefully exits.
-            // throw e
             failed.push({
                 error: e,
                 fileName: program.absoluteName
@@ -438,7 +436,6 @@ export class OverloadScope {
 }
 
 class IDLVisitor extends arkts.AbstractVisitor {
-    //writer = new IDLLanguageWriter()
     entries: idl.IDLEntry[] = []
     fileName: string
     packageClause: string[] = []

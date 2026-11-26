@@ -379,12 +379,6 @@ export function isCommonMethodOrSubclass(library: PeerLibrary, decl?: idl.IDLEnt
 }
 
 export function isSourceDecl(node: idl.IDLEntry): boolean {
-    // if (isNamespace(node.parent))
-    //     return this.isSourceDecl(node.parent.parent)
-    // if (isTypeParameterType(node))
-    //     return false
-    // if (!ts.isSourceFile(node.parent))
-    //     throw 'Expected declaration to be at file root'
     return !node.fileName?.endsWith('stdlib.d.ts')
 }
 
@@ -393,8 +387,6 @@ function generateSignature(
     returnType?: idl.IDLType
 ): NamedMethodSignature {
     returnType ??= method.returnType!
-    // if (idl.isConstructor(method) && method.parent)
-    //     returnType = idl.createReferenceType(method.parent as idl.IDLInterface)
     if (returnType === undefined) {
         throw new Error(`Return type for ${method.name} is undefined`)
     }

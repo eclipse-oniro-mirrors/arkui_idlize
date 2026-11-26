@@ -306,16 +306,6 @@ rule ohosgen
             relative(OUT_DIR, arkuiGeneratedPath('**', '*.ets'))
         ],
     }
-    // const SDK_DIR = resolve('..', 'sdk-patched-arkts', 'api')
-    // result.external.forEach(record => {
-    //     if (record.packageName === '') {
-    //         return
-    //     }
-    //     const idlFileName = record.fileName
-    //     const pureFilePath = join(dirname(idlFileName), basename(idlFileName, extname(idlFileName)))
-    //     const frontendFilePath = join(SDK_DIR, pureFilePath)
-    //     arkuiConfig.compilerOptions.paths[findTsLikePackage(record, options)] = [frontendFilePath + '.d.ets']
-    // })
     scanAbsolutePathDir().forEach(([packageName, fileName]) => {
         let value = [fileName]
         if (options.rewriteArkConfigPath.has(packageName)) {

@@ -498,10 +498,8 @@ export class AggregateConvertor extends BaseArgConvertor {
 
     constructor(protected library: LibraryInterface, param: string, type: idl.IDLType, protected decl: idl.IDLInterface) {
         super(type, [RuntimeType.OBJECT], false, true, param)
-        // this.aliasName = ts.isTypeAliasDeclaration(this.type.parent) ? identName(this.type.parent.name) : undefined
         this.memberConvertors = decl
             .properties
-            // .filter(ts.isPropertySignature)
             .map((member, index) => {
                 this.members[index] = [member.name, member.isOptional]
                 return library.typeConvertor(param, member.type!, member.isOptional)
@@ -654,7 +652,6 @@ export class InterfaceConvertor extends BaseArgConvertor {
     }
     interopType(): idl.IDLType {
         // Actually shouldn't be used!
-        // throw new Error("Must never be used")
         return idl.IDLSerializerBuffer
     }
     isPointerType(): boolean {

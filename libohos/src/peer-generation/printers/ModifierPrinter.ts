@@ -52,8 +52,6 @@ function peerToOutString(library: PeerLibrary, context: idl.IDLInterface, method
     if (isMaterialized(context, library)) {
         if (method.sig.name === PeerMethodSignature.CTOR)
             return `new ${context.name}`
-        // if (method.sig.name === PeerMethodSignature.DESTROY)
-        //     return `delete ${context.name}`
         return method.sig.name
     }
     throw new Error("Can not generate string representation of peer " + method.sig.name)

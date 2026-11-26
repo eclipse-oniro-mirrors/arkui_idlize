@@ -46,7 +46,6 @@ class FqnTransformer extends IdlTransformer {
                     node.typeArguments?.map(it => this.visit(it) as idl.IDLType),
                     idl.cloneNodeInitializer(node),
                 )
-                // throw new Error("Can not expand FQN for " + idl.DebugUtils.debugPrintType(node))
             }
             return idl.createReferenceType(
                 idl.getFQName(resolved),
