@@ -82,8 +82,6 @@ declare type StyledStringValue =
 
 declare class StyledString {
 
-    //    constructor(value: string | ImageAttachment | CustomSpan, styles?: Array<StyleOptions>);
-
     readonly length: number;
 
     getString(): string;
